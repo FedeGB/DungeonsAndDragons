@@ -15,7 +15,39 @@ contract DungeansAndDragons {
 	}
 
 	enum class {
-		
+		DRUID,
+		ROGUE,
+		FIGHTER,
+		WARLOCK,
+		BARBARIAN,
+		BARD,
+		CLERIC,
+		MONK,
+		PALADIN,
+		RANGER,
+		SORCERER,
+		WIZARD
+	}
+
+	enum alignment {
+		LAWFULGOOD,
+		NEUTRALGOOD,
+		CHAOTICGOOD,
+		LAWFULNEUTRAL,
+		NEUTRAL,
+		CHAOTICNEUTRAL,
+		LAWFULEVIL,
+		NEUTRALEVIL,
+		CHAOTICEVIL
+	}
+
+	enum deity {
+		BOCCOB,
+		CORELLONLARETH,
+		GARLGLITTERGOLD,
+		GRUUMSH,
+		PELOR,
+		YONDALLA
 	}
 
 	struct BaiscCharacterRecordSheet {
