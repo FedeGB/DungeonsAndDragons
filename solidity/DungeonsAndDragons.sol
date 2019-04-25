@@ -1,6 +1,11 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.5.1;
 
-contract DungeansAndDragons {
+contract DungeonsAndDragons {
+
+	address public creator;
+	uint public createdAt;
+
+	mapping (address => int) public balances;
 
 	enum race {
 		HALFELF,
@@ -11,7 +16,7 @@ contract DungeansAndDragons {
 		ELF,
 		HALFLING,
 		DRAGONBORN,
-		TIEFLING,
+		TIEFLING
 	}
 
 	enum class {
@@ -29,27 +34,6 @@ contract DungeansAndDragons {
 		WIZARD
 	}
 
-	enum alignment {
-		LAWFULGOOD,
-		NEUTRALGOOD,
-		CHAOTICGOOD,
-		LAWFULNEUTRAL,
-		NEUTRAL,
-		CHAOTICNEUTRAL,
-		LAWFULEVIL,
-		NEUTRALEVIL,
-		CHAOTICEVIL
-	}
-
-	enum deity {
-		BOCCOB,
-		CORELLONLARETH,
-		GARLGLITTERGOLD,
-		GRUUMSH,
-		PELOR,
-		YONDALLA
-	}
-
 	struct BaiscCharacterRecordSheet {
 		address characterBlockDir;
 		string name;
@@ -57,15 +41,21 @@ contract DungeansAndDragons {
 		string class;
 		uint64 level;
 		string race;
-		string alignment;
-		string deity;
 		uint64 size; // Might be a string
 		uint64 age;
 		string gender;
-		uint64 height; // centimeters
-		uint64 weight; // kilograms
-		string eyes;
-		string hair;
-		string skin;
+	}
+
+	BaiscCharacterRecordSheet public playerSheet;
+
+	constructor() public payable {
+	    creator = msg.sender;
+	    createdAt = now;
+	    balances[msg.sender] = 10000;
+	}
+
+	function setBasicCharacterSheet(address charBlockDir, string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 size, uint64 age, string memory gender) public {
+		require(msg.sender == creator, "Only the creator of it\'s own player sheet can modify it\'s data");
+		playerSheet = BaiscCharacterRecordSheet({characterBlockDir: charBlockDir, name: name, player: player, class: class, level: level, race: race, size: size, age: age, gender: gender});
 	}
 }
