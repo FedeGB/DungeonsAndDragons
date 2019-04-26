@@ -1,5 +1,5 @@
 import React from 'react';
-import './BasicCharacterData.css';
+// import './BasicCharacterData.css';
 
 class BasicCharacterData extends React.Component {
   

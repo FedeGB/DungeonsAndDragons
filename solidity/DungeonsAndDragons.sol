@@ -7,7 +7,7 @@ contract DungeonsAndDragons {
 
 	mapping (address => int) public balances;
 
-	enum race {
+/*	enum race {
 		HALFELF,
 		HALFORC,
 		HUMAN,
@@ -19,7 +19,7 @@ contract DungeonsAndDragons {
 		TIEFLING
 	}
 
-	enum class {
+    enum class {
 		DRUID,
 		ROGUE,
 		FIGHTER,
@@ -33,7 +33,7 @@ contract DungeonsAndDragons {
 		SORCERER,
 		WIZARD
 	}
-
+*/
 	struct BaiscCharacterRecordSheet {
 		address characterBlockDir;
 		string name;
