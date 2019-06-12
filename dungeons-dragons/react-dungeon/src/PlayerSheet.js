@@ -6,7 +6,13 @@ class PlayerSheet extends React.Component {
 			dataKey: null,
 			stackId: null,
 			charName: '',
-			playerName: ''
+			playerName: '',
+			class: '',
+			level: 0,
+			race: '',
+			size: 0,
+			age: 0,
+			gender: ''
 	};
 
 	constructor(props) {
@@ -20,15 +26,14 @@ class PlayerSheet extends React.Component {
 	}
 
 	handleSubmit(event) {
-		console.log(`A Character Name: ${this.state.charName}`);
-		console.log(`A Player Name: ${this.state.playerName}`);
 		const { drizzle, drizzleState } = this.props;
 		const contract = drizzle.contracts.DungeonsAndDragons;
 		// let drizzle know we want to call the `add` method with `value1 and value2`
-		const stackId = contract.methods["setBasicCharacterSheet"].cacheSend(this.state.charName, this.state.playerName, "Druid", 1, "Orc", 10, 27, "Male", {
+		const stackId = contract.methods["setBasicCharacterSheet"].cacheSend(this.state.charName, this.state.playerName, this.state.class, this.state.level,
+		 this.state.race, this.state.size, this.state.age, this.state.gender, {
 		  from: drizzleState.accounts[0]
 		});
-		console.log(drizzleState.accounts[0]);
+		console.log(drizzleState.accounts);
 		// save the `stackId` for later reference
 		this.setState({ stackId });
 		event.preventDefault();
@@ -75,12 +80,22 @@ class PlayerSheet extends React.Component {
 	    
 		    <form onSubmit={this.handleSubmit}>
 	        	<div>
-	          		<input id="charName" type="text" value={this.state.charName} onChange={this.handleChange} />
 	          		<div>Character Name</div>
-	        	</div>
-	        	<div>
-	          		<input id="playerName" type="text" value={this.state.playerName} onChange={this.handleChange} />
+	          		<input id="charName" type="text" value={this.state.charName} onChange={this.handleChange} />
 	          		<div>Player Name</div>
+	          		<input id="playerName" type="text" value={this.state.playerName} onChange={this.handleChange} />
+	          		<div>Class</div>
+	          		<input id="class" type="text" value={this.state.class} onChange={this.handleChange} />
+	          		<div>Level</div>
+	          		<input id="level" type="text" value={this.state.level} onChange={this.handleChange} />
+	          		<div>Race</div>
+	          		<input id="race" type="text" value={this.state.race} onChange={this.handleChange} />
+	          		<div>Size</div>
+	          		<input id="size" type="text" value={this.state.size} onChange={this.handleChange} />
+	          		<div>Age</div>
+	          		<input id="age" type="text" value={this.state.age} onChange={this.handleChange} />
+	          		<div>Gender</div>
+	          		<input id="gender" type="text" value={this.state.gender} onChange={this.handleChange} />
 	        	</div>
 	        	<input type="submit" value="Submit" />
 	 	    </form>
