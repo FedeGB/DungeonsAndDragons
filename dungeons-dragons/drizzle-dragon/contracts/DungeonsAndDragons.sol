@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.0;
 
 contract DungeonsAndDragons {
 
@@ -35,7 +35,7 @@ contract DungeonsAndDragons {
 	}
 */
 	struct BaiscCharacterRecordSheet {
-		address characterBlockDir;
+		// address characterBlockDir;
 		string name;
 		string player;
 		string class;
@@ -54,8 +54,8 @@ contract DungeonsAndDragons {
 	    balances[msg.sender] = 10000;
 	}
 
-	function setBasicCharacterSheet(address charBlockDir, string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 size, uint64 age, string memory gender) public {
+	function setBasicCharacterSheet(string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 size, uint64 age, string memory gender) public {
 		require(msg.sender == creator, "Only the creator of it\'s own player sheet can modify it\'s data");
-		playerSheet = BaiscCharacterRecordSheet({characterBlockDir: charBlockDir, name: name, player: player, class: class, level: level, race: race, size: size, age: age, gender: gender});
+		playerSheet = BaiscCharacterRecordSheet({name: name, player: player, class: class, level: level, race: race, size: size, age: age, gender: gender});
 	}
 }

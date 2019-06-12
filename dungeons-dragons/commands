@@ -1,0 +1,15 @@
+Ganache commands
+
+- Start ganache (minning every 2 seconds):
+$ ganache-cli -b 2 
+
+Truffle commands
+
+- Compile
+$ truffle compile
+
+- Migrate (deploy contract to ganache, ganache needs to be running)
+$ truffle migrate
+
+- Run tests over contract (obviosly contract must be deployed)
+$ truffle test

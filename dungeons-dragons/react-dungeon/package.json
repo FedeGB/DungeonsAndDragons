@@ -1,15 +1,12 @@
 {
-  "name": "dungeons-and-dragons-react",
+  "name": "react-dungeon",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "csstools": "^0.1.5",
+    "drizzle": "^1.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0",
-    "bulma-start": "0.0.2",
-    "truffle-contract": "^3.0.6",
-    "web3-js": "^1.0.5-beta.26"
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
