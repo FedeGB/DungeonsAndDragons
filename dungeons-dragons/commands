@@ -2,6 +2,7 @@ Ganache commands
 
 - Start ganache (minning every 2 seconds):
 $ ganache-cli -b 2 
+// Remember to copy accounts and private keys to use on Metamask
 
 Truffle commands
 
@@ -13,3 +14,8 @@ $ truffle migrate
 
 - Run tests over contract (obviosly contract must be deployed)
 $ truffle test
+
+- To run and test contract we use develop env
+$ truffle develop
+// Here we deploy a testing truffle blockchaing to test the contract
+// We need to run migrate (without the truffle command) to have the contract deployed

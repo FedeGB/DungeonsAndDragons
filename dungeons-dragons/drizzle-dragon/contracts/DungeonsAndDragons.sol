@@ -41,7 +41,6 @@ contract DungeonsAndDragons {
 		string class;
 		uint64 level;
 		string race;
-		uint64 size; // Might be a string
 		uint64 age;
 		string gender;
 	}
@@ -54,8 +53,9 @@ contract DungeonsAndDragons {
 	    balances[msg.sender] = 10000;
 	}
 
-	function setBasicCharacterSheet(string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 size, uint64 age, string memory gender) public {
+	function setBasicCharacterSheet(string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 age, string memory gender) public {
 		require(msg.sender == creator, "Only the creator of it\'s own player sheet can modify it\'s data");
-		playerSheet = BaiscCharacterRecordSheet({name: name, player: player, class: class, level: level, race: race, size: size, age: age, gender: gender});
+		playerSheet = BaiscCharacterRecordSheet({name: name, player: player, class: class, level: level, race: race, age: age, gender: gender});
 	}
+
 }
