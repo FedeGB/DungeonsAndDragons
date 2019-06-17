@@ -30,6 +30,9 @@ class PlayerSheet extends React.Component {
 		const { drizzle, drizzleState } = this.props;
 		const contract = drizzle.contracts.DungeonsAndDragons;
 		// let drizzle know we want to call the `add` method with `value1 and value2`
+		if(this.state.class === '') this.setState({class: 'Druid'});
+		if(this.state.race === '') this.state.setState({race: 'Half Elf'});
+		if(this.state.gender === '') this.state.setState({gender: 'Male'});
 		const stackId = contract.methods["setBasicCharacterSheet"].cacheSend(this.state.charName, this.state.playerName, this.state.class, this.state.level,
 		 this.state.race, this.state.age, this.state.gender, {
 		  from: drizzleState.accounts[0]
@@ -105,7 +108,7 @@ class PlayerSheet extends React.Component {
 						<option value="Other">Other</option>
 					</select>
 	        	</div>
-	        	<input class="submit-button" type="submit" value="Submit" />
+	        	<input className="submit-button" type="submit" value="Submit" />
 	 	    </form>
 	 	    <p>Txn Status:</p>
 	 	    <div>{this.getTxStatus()}</div>
