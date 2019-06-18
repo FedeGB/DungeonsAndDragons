@@ -1,0 +1,52 @@
+		<div>
+	    	<p>Player Sheet:</p>
+	    	<p>Name: {playerSheet && playerSheet.value.name}</p>
+	    	<p>Player: {playerSheet && playerSheet.value.player}</p>
+	    	<p>Class: {playerSheet && playerSheet.value.class}</p>
+	    	<p>Level: {playerSheet && playerSheet.value.level}</p>
+	    	<p>Race: {playerSheet && playerSheet.value.race}</p>
+	    	<p>Age: {playerSheet && playerSheet.value.age}</p>
+	    	<p>Gender: {playerSheet && playerSheet.value.gender}</p>
+	    
+		    <form id="basic-player-info" onSubmit={this.handleSubmit}>
+	        	<div>
+	          		<div>Character Name</div>
+	          		<input id="charName" type="text" value={this.state.charName} onChange={this.handleChange} />
+	          		<div>Player Name</div>
+	          		<input id="playerName" type="text" value={this.state.playerName} onChange={this.handleChange} />
+	          		<div>Class</div>
+					<select id="class" value={this.state.class} onChange={this.handleChange}>
+						<option value="Druid">Druid</option>
+						<option value="Rogue">Rogue</option>
+						<option value="Warlock">Warlock</option>
+						<option value="Cleric">Cleric</option>
+						<option value="Paladin">Paladin</option>
+						<option value="Wizard">Wizard</option>
+						<option value="Fighter">Figher</option>
+						<option value="Barbarian">Barbarian</option>
+					</select>
+	          		<div>Level</div>
+	          		<input id="level" type="text" value={this.state.level} onChange={this.handleChange} />
+	          		<div>Race</div>
+	          		<select id="race" value={this.state.race} onChange={this.handleChange}>
+						<option value="Half Elf">Half Elf</option>
+						<option value="Half Orc">Half Orc</option>
+						<option value="Human">Human</option>
+						<option value="Dwarf">Dwarf</option>
+						<option value="Gnome">Gnome</option>
+						<option value="Dragonborn">Dragonborn</option>
+					</select>
+	          		<div>Age</div>
+	          		<input id="age" type="text" value={this.state.age} onChange={this.handleChange} />
+	          		<div>Gender</div>
+	          		<select id="gender" value={this.state.gender} onChange={this.handleChange}>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Other">Other</option>
+					</select>
+	        	</div>
+	        	<input className="submit-button" type="submit" value="Submit" />
+	 	    </form>
+	 	    <p>Txn Status:</p>
+	 	    <div>{this.getTxStatus()}</div>
+	    </div>
