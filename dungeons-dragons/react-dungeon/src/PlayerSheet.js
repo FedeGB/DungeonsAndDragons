@@ -31,8 +31,8 @@ class PlayerSheet extends React.Component {
 		const { drizzle, drizzleState } = this.props;
 		const contract = drizzle.contracts.DungeonsAndDragons;
 		if(this.state.class === '') this.setState({class: 'Druid'});
-		if(this.state.race === '') this.state.setState({race: 'Half Elf'});
-		if(this.state.gender === '') this.state.setState({gender: 'Male'});
+		if(this.state.race === '') this.setState({race: 'Half Elf'});
+		if(this.state.gender === '') this.setState({gender: 'Male'});
 		const stackId = contract.methods["setBasicCharacterSheet"].cacheSend(this.state.charName, this.state.playerName, this.state.class, this.state.level,
 		 this.state.race, this.state.age, this.state.gender, {
 		  from: drizzleState.accounts[0]
@@ -62,11 +62,12 @@ class PlayerSheet extends React.Component {
 	    const playerSheet = DungeonsAndDragons.playerSheet[this.state.dataKey];
 	    return (
 	    	<div>
-		    	<form className="charsheet">
+		    	<form className="charsheet" onSubmit={this.handleSubmit}>
 				  <header>
 				    <section className="charname">
 				      <label htmlFor="charname">Character Name</label>
 				      <input id="charName" value={this.state.charName} onChange={this.handleChange} name="charname" placeholder="Thoradin Fireforge" />
+				      <div>{playerSheet && playerSheet.value.name}</div>
 				    </section>
 				    <section className="misc">
 				      <ul>
@@ -82,6 +83,7 @@ class PlayerSheet extends React.Component {
 							<option value="Fighter">Figher</option>
 							<option value="Barbarian">Barbarian</option>
 						  </select>
+						  <div>{playerSheet && playerSheet.value.class}</div>
 				        </li>
 				        <li>
 				          <label htmlFor="level">Level</label>
