@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import PlayerSheet from './PlayerSheet'
+import Initialization from './Initialization'
 class App extends Component {
 
-  state = { loading: true, drizzleState: null };
+  state = {
+    loading: true,
+    drizzleState: null,
+    step: 'init'
+   };
 
   componentDidMount() {
     const { drizzle } = this.props;
@@ -27,10 +32,15 @@ class App extends Component {
     if (this.state.loading) return "Loading Drizzle...";
     return (
       <div className="App">
-        <PlayerSheet
-          drizzle={this.props.drizzle}
-          drizzleState={this.state.drizzleState}
-        />
+      {this.state.step == 'init' &&
+        <Initialization />
+      }
+      {this.state.step == 'sheet' &&
+          <PlayerSheet
+            drizzle={this.props.drizzle}
+            drizzleState={this.state.drizzleState}
+          />
+      }
       </div>
     );
   }

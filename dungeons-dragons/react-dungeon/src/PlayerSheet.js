@@ -57,6 +57,16 @@ class PlayerSheet extends React.Component {
 	    this.setState({ dataKey });
 	  }
 
+	getPlayerSheetValues() {
+	    setTimeout(
+	    	() => {
+				const { DungeonsAndDragons } = this.props.drizzleState.contracts;
+	    		const playerSheet = DungeonsAndDragons.playerSheet[this.state.dataKey];
+	    	},
+	    	300
+	    )
+	};
+
 	render() {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
 	    const playerSheet = DungeonsAndDragons.playerSheet[this.state.dataKey];
@@ -88,10 +98,12 @@ class PlayerSheet extends React.Component {
 				        <li>
 				          <label htmlFor="level">Level</label>
 				          <input id="level" name="level" value={this.state.level} onChange={this.handleChange} placeholder="1" />
+				          <div>{playerSheet && playerSheet.value.level}</div>
 				        </li>
 				        <li>
 				          <label htmlFor="playername">Player Name</label>
 				          <input id="playerName" value={this.state.playerName} onChange={this.handleChange} name="playername" placeholder="Player McPlayerface" />
+				          <div>{playerSheet && playerSheet.value.player}</div>
 				        </li>
 				        <li>
 				          <label htmlFor="race">Race</label>
@@ -103,6 +115,7 @@ class PlayerSheet extends React.Component {
 							<option value="Gnome">Gnome</option>
 							<option value="Dragonborn">Dragonborn</option>
 						  </select>
+						  <div>{playerSheet && playerSheet.value.race}</div>
 				        </li>
 				        <li>
 				          <label htmlFor="gender">Gender</label>
@@ -111,10 +124,12 @@ class PlayerSheet extends React.Component {
 							<option value="Female">Female</option>
 							<option value="Other">Other</option>
 						  </select>
+						  <div>{playerSheet && playerSheet.value.gender}</div>
 				        </li>
 				        <li>
 				          <label htmlFor="age">Age</label>
 				          <input id="age" type="text" value={this.state.age} onChange={this.handleChange} ame="age" placeholder="10" />
+				          <div>{playerSheet && playerSheet.value.age}</div>
 				        </li>
 				      </ul>
 				    </section>
