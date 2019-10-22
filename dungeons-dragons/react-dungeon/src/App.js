@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import PlayerSheet from './PlayerSheet'
-import Initialization from './Initialization'
 class App extends Component {
 
   state = {
@@ -28,18 +26,30 @@ class App extends Component {
     this.unsubscribe();
   }
 
+  handleGoTo = (stepTo) => {
+    this.setState({step: stepTo})
+  }
+
   render() {
     if (this.state.loading) return "Loading Drizzle...";
+    console.log(this.state.drizzleState)
     return (
       <div className="App">
-      {this.state.step == 'init' &&
-        <Initialization />
+      {this.state.step === 'init' &&
+        <div>
+          <div className="dnd">Dungeons & Dragons</div>
+          <button className="continue-button" onClick={() => {this.setState({step:'sheet-first'})}}>Continue</button>
+        </div>
       }
-      {this.state.step == 'sheet' &&
+      {this.state.step === 'sheet-first' &&
           <PlayerSheet
             drizzle={this.props.drizzle}
             drizzleState={this.state.drizzleState}
+            goToSecond={this.handleGoTo}
           />
+      }
+      {this.state.step === 'sheet-second' &&
+        <div>Sheet 2</div>
       }
       </div>
     );

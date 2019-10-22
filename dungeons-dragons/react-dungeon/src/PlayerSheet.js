@@ -37,9 +37,9 @@ class PlayerSheet extends React.Component {
 		 this.state.race, this.state.age, this.state.gender, {
 		  from: drizzleState.accounts[0]
 		});
-		console.log(drizzleState.accounts);
 		this.setState({ stackId });
 		event.preventDefault();
+		this.props.goToSecond('sheet-second')
 	}
 
 	getTxStatus = () => {
@@ -56,16 +56,6 @@ class PlayerSheet extends React.Component {
 	    const dataKey = contract.methods["playerSheet"].cacheCall();
 	    this.setState({ dataKey });
 	  }
-
-	getPlayerSheetValues() {
-	    setTimeout(
-	    	() => {
-				const { DungeonsAndDragons } = this.props.drizzleState.contracts;
-	    		const playerSheet = DungeonsAndDragons.playerSheet[this.state.dataKey];
-	    	},
-	    	300
-	    )
-	};
 
 	render() {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
