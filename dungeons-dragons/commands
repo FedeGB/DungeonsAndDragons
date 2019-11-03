@@ -8,6 +8,8 @@ Truffle commands
 
 - Compile
 $ truffle compile
+// Better run with script 
+$ ./truffle-compile.sh
 
 - Migrate (deploy contract to ganache, ganache needs to be running)
 $ truffle migrate
