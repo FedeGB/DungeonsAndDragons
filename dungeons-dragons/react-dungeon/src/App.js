@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import PlayerSheet from './PlayerSheet'
+import Base from './PlayerSheet/Base'
+import Stats from './PlayerSheet/Stats'
 class App extends Component {
 
   state = {
     loading: true,
     drizzleState: null,
-    step: 'init'
+    step: 0
    };
 
   componentDidMount() {
@@ -35,21 +36,27 @@ class App extends Component {
     console.log(this.state.drizzleState)
     return (
       <div className="App">
-      {this.state.step === 'init' &&
+      {this.state.step === 0 &&
         <div>
           <div className="dnd">Dungeons & Dragons</div>
-          <button className="continue-button" onClick={() => {this.setState({step:'sheet-first'})}}>Continue</button>
+          <button className="continue-button" onClick={() => {this.setState({step:1})}}>Continue</button>
         </div>
       }
-      {this.state.step === 'sheet-first' &&
-          <PlayerSheet
-            drizzle={this.props.drizzle}
-            drizzleState={this.state.drizzleState}
-            goToSecond={this.handleGoTo}
-          />
+      {this.state.step >= 1 &&
+        <Base
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+          goToSecond={this.handleGoTo}
+          currentStep={this.state.step}
+        />
       }
-      {this.state.step === 'sheet-second' &&
-        <div>Sheet 2</div>
+      {this.state.step >= 2 &&
+        <Stats
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+          goToThird={this.handleGoTo}
+          currentStep={this.state.step}
+        />
       }
       </div>
     );

@@ -1,0 +1,152 @@
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+.hide {
+  display: none !important;
+}
+
+textarea {
+  font-size: 12px;
+  text-align: left;
+  width: calc(100% - 20px - 2px);
+  border-radius: 10px;
+  padding: 10px;
+  resize: none;
+  overflow: hidden;
+  height: 15em;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+div.box {
+  margin-top: 10px;
+}
+
+form.charsheet {
+  width: 800px;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10px;
+}
+form.charsheet div.textblock {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  align-items: center;
+}
+form.charsheet div.textblock label {
+  text-align: center;
+  border: 1px solid black;
+  border-top: 0;
+  font-size: 10px;
+  width: calc(100% - 20px - 2px);
+  border-radius: 0 0 10px 10px;
+  padding: 4px 0;
+  font-weight: bold;
+}
+form.charsheet div.textblock textarea {
+  border: 1px solid black;
+}
+form.charsheet ul {
+  margin: 0;
+  padding: 0;
+}
+form.charsheet ul li {
+  list-style-image: none;
+  display: block;
+}
+form.charsheet ::-webkit-input-placeholder {
+  color: #bbb;
+}
+form.charsheet :-ms-input-placeholder {
+  color: #bbb;
+}
+form.charsheet ::-ms-input-placeholder {
+  color: #bbb;
+}
+form.charsheet ::placeholder {
+  color: #bbb;
+}
+form.charsheet label {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+form.charsheet header {
+  display: flex;
+  align-contents: stretch;
+  align-items: stretch;
+}
+form.charsheet header section.charname {
+  border: 1px solid black;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+  padding: 5px 0;
+  background-color: #eee;
+  width: 30%;
+  display: flex;
+  flex-direction: column-reverse;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
+form.charsheet header section.charname input {
+  padding: 0.5em;
+  margin: 5px;
+  border: 0;
+}
+form.charsheet header section.charname label {
+  padding-left: 1em;
+}
+form.charsheet header section.misc {
+  width: 70%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+form.charsheet header section.misc ul {
+  padding: 10px 0px 5px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+form.charsheet header section.misc ul li {
+  width: 33.33333%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+form.charsheet header section.misc ul li label {
+  margin-bottom: 5px;
+}
+form.charsheet header section.misc ul li input {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.submit-button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50; /* Green */
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
