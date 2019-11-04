@@ -153,10 +153,25 @@ form.charsheet-stats main > section section.attributes div.scores ul li div.scor
   padding: 2px 0px 0px 0px;
   background: white;
 }
+form.charsheet-stats main > section section.attributes div.scores ul li div.score div {
+  text-align: center;
+  font-size: 40px;
+  padding: 2px 0px 0px 0px;
+  background: white;
+}
 form.charsheet-stats main > section section.attributes div.scores ul li div.modifier {
   margin-top: 3px;
 }
 form.charsheet-stats main > section section.attributes div.scores ul li div.modifier input {
+  background: white;
+  width: 30px;
+  height: 20px;
+  border: 1px inset black;
+  border-radius: 20px;
+  margin: -1px;
+  text-align: center;
+}
+form.charsheet-stats main > section section.attributes div.scores ul li div.modifier div {
   background: white;
   width: 30px;
   height: 20px;

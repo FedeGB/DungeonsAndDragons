@@ -33,13 +33,13 @@ class App extends Component {
 
   render() {
     if (this.state.loading) return "Loading Drizzle...";
-    console.log(this.state.drizzleState)
+    // console.log(this.state.drizzleState)
     return (
       <div className="App">
       {this.state.step === 0 &&
         <div>
           <div className="dnd">Dungeons & Dragons</div>
-          <button className="continue-button" onClick={() => {this.setState({step:1})}}>Continue</button>
+          <button className="continue-button" onClick={() => {this.setState({step:1})}}>Start Sheet</button>
         </div>
       }
       {this.state.step >= 1 &&

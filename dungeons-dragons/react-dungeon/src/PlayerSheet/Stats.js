@@ -7,6 +7,19 @@ class Stats extends React.Component {
 	state = { 
 			dataKey: null,
 			stackId: null,
+			// strength: 0,
+			// strengthModifier: 0,
+			// dexterity: 0,
+			// dexterityModifier: 0,
+			// constitution: 0,
+			// constitutionModifier: 0,
+			// wisdom: 0,
+			// wisdomModifier: 0,
+			// intelligence: 0,
+			// intelligenceModifier: 0,
+			// charisma: 0,
+			// charismaModifier: 0,
+			statsAssigned: {},
 	};
 
 	constructor(props) {
@@ -22,9 +35,20 @@ class Stats extends React.Component {
 	handleSubmit(event) {
 		const { drizzle, drizzleState } = this.props;
 		const contract = drizzle.contracts.DungeonsAndDragons;
-		// this.setState({ stackId });
+		const stackId = contract.methods["setStatsCharacterSheet"].cacheSend(
+			this.state.statsAssigned.strength,
+			this.state.statsAssigned.dexterity,
+			this.state.statsAssigned.constitution,
+			this.state.statsAssigned.wisdom,
+			this.state.statsAssigned.intelligence,
+			this.state.statsAssigned.charisma, 
+			{
+			  from: drizzleState.accounts[0]
+			}
+		);
+		this.setState({ stackId });
 		event.preventDefault();
-		this.props.goToThird('sheet-third')
+		this.props.goToThird(3)
 	}
 
 	getTxStatus = () => {
@@ -38,13 +62,22 @@ class Stats extends React.Component {
 	componentDidMount() {
 	    const { drizzle } = this.props;
 	    const contract = drizzle.contracts.DungeonsAndDragons;
-	    const dataKey = contract.methods["playerSheet"].cacheCall();
-	    this.setState({ dataKey });
+	    const dataKey = contract.methods["playerSheetStats"].cacheCall();
+	    // this.setState({ dataKey });
+	    this.setState({dataKey, statsAssigned: {
+	    	strength: 12,
+	    	dexterity: 11,
+	    	constitution: 15,
+	    	wisdom: 10,
+	    	intelligence: 6,
+	    	charisma: 18,
+	    }})
 	  }
 
 	render() {
+		// const statsCount = Object.keys(this.state.statsAssigned).length
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
-	    const playerSheet = DungeonsAndDragons.playerSheet[this.state.dataKey];
+	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey];
 	    return (
 	    	<div>
 		    	<form className="charsheet-stats" onSubmit={this.handleSubmit}>
@@ -55,50 +88,56 @@ class Stats extends React.Component {
 				          <ul>
 				            <li>
 				              <div className="score">
-				                <label htmlFor="Strengthscore">Strength</label><input name="Strengthscore" placeholder="10" />
+				                <label htmlFor="Strengthscore">Strength</label>
+				                <div>{playerSheetStats && playerSheetStats.value.strength}</div>
 				              </div>
 				              <div className="modifier">
-				                <input name="Strengthmod" placeholder="+0" />
+				                <div>{playerSheetStats && playerSheetStats.value.strengthModifier}</div>
 				              </div>
 				            </li>
 				            <li>
 				              <div className="score">
-				                <label htmlFor="Dexterityscore">Dexterity</label><input name="Dexterityscore" placeholder="10" />
+				                <label htmlFor="Dexterityscore">Dexterity</label>
+				                <div>{playerSheetStats && playerSheetStats.value.dexterity}</div>
 				              </div>
 				              <div className="modifier">
-				                <input name="Dexteritymod" placeholder="+0" />
+				                <div>{playerSheetStats && playerSheetStats.value.dexterityModifier}</div>
 				              </div>
 				            </li>
 				            <li>
 				              <div className="score">
-				                <label htmlFor="Constitutionscore">Constitution</label><input name="Constitutionscore" placeholder="10" />
+				                <label htmlFor="Constitutionscore">Constitution</label>
+				                <div>{playerSheetStats && playerSheetStats.value.constitution}</div>
 				              </div>
 				              <div className="modifier">
-				                <input name="Constitutionmod" placeholder="+0" />
+				                <div>{playerSheetStats && playerSheetStats.value.constitutionModifier}</div>
 				              </div>
 				            </li>
 				            <li>
 				              <div className="score">
-				                <label htmlFor="Wisdomscore">Wisdom</label><input name="Wisdomscore" placeholder="10" />
+				                <label htmlFor="Wisdomscore">Wisdom</label>
+				                <div>{playerSheetStats && playerSheetStats.value.wisdom}</div>
 				              </div>
 				              <div className="modifier">
-				                <input name="Wisdommod" placeholder="+0" />
+				                <div>{playerSheetStats && playerSheetStats.value.wisdomModifier}</div>
 				              </div>
 				            </li>
 				            <li>
 				              <div className="score">
-				                <label htmlFor="Intelligencescore">Intelligence</label><input name="Intelligencescore" placeholder="10" />
+				                <label htmlFor="Intelligencescore">Intelligence</label>
+				                <div>{playerSheetStats && playerSheetStats.value.intelligence}</div>
 				              </div>
 				              <div className="modifier">
-				                <input name="Intelligencemod" placeholder="+0" />
+				                <div>{playerSheetStats && playerSheetStats.value.intelligenceModifier}</div>
 				              </div>
 				            </li>
 				            <li>
 				              <div className="score">
-				                <label htmlFor="Charismascore">Charisma</label><input name="Charismascore" placeholder="10" />
+				                <label htmlFor="Charismascore">Charisma</label>
+				                <div>{playerSheetStats && playerSheetStats.value.charisma}</div>
 				              </div>
 				              <div className="modifier">
-				                <input name="Charismamod" placeholder="+0" />
+				                <div>{playerSheetStats && playerSheetStats.value.charismaModifier}</div>
 				              </div>
 				            </li>
 				          </ul>
