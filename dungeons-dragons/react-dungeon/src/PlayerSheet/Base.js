@@ -43,11 +43,12 @@ class Base extends React.Component {
 	}
 
 	getTxStatus = () => {
-		const { transactions, transactionStack } = this.props.drizzleState;
-		const txHash = transactionStack[this.state.stackId];
-		if (!txHash) return null;
-		if(!transactions[txHash]) return null;
-		return `Transaction status: ${transactions[txHash].status}`;
+		const { transactions, transactionStack } = this.props.drizzleState
+		const txHash = transactionStack[this.state.stackId]
+		if (!txHash) return null
+		if(!transactions[txHash]) return null
+		console.log(transactions[txHash])
+		return transactions[txHash].status
 	};
 
 	componentDidMount() {
@@ -133,7 +134,7 @@ class Base extends React.Component {
 				  }
 				</form>
 				<p>Txn Status:</p>
-	 	    	<div>{this.getTxStatus()}</div>
+	 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
 			</div>
 	    );
 	}
