@@ -7,21 +7,16 @@ class Stats extends React.Component {
 	state = { 
 			dataKey: null,
 			stackId: null,
-			// strength: 0,
-			// strengthModifier: 0,
-			// dexterity: 0,
-			// dexterityModifier: 0,
-			// constitution: 0,
-			// constitutionModifier: 0,
-			// wisdom: 0,
-			// wisdomModifier: 0,
-			// intelligence: 0,
-			// intelligenceModifier: 0,
-			// charisma: 0,
-			// charismaModifier: 0,
-			statsAssigned: {},
-			allRolls: [],
-	};
+			statsAssigned: {
+		    	strength: 0,
+		    	dexterity: 0,
+		    	constitution: 0,
+		    	wisdom: 0,
+		    	intelligence: 0,
+		    	charisma: 0,
+			},
+			submitted: false,
+	}
 
 	constructor(props) {
 		super(props);
@@ -47,22 +42,17 @@ class Stats extends React.Component {
 		event.preventDefault();
 	}
 
-	rollForAllStats = () => {
-		let allRolls = []
-		for(var i = 0; i < 6; i++) {
-			allRolls.push(this.rollForStat())
-		}
-		this.setState({allRolls})
-	}
-
 	getTxStatus = () => {
 		const { transactions, transactionStack } = this.props.drizzleState;
 		const txHash = transactionStack[this.state.stackId];
 		if (!txHash) return null;
 		if(!transactions[txHash]) return null;
-		if(transactions[txHash].status === 'success') this.props.goToThird(3)
+		if(transactions[txHash].status === 'success') {
+			this.setState({submitted: true})
+			this.props.goToThird(3)
+		}
 		return `Transaction status: ${transactions[txHash].status}`;
-	};
+	}
 
 	rollD6 = () => {
 		return Math.floor(Math.random() * 6) + 1
@@ -78,23 +68,36 @@ class Stats extends React.Component {
 		return results.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
 	}
 
-	handleChangeSelector = (event) => {
+	assignStat = (stat) => {
+		const statRolled = this.rollForStat()
+		let assign = this.state.statsAssigned
+		assign[stat] = statRolled
+		this.setState({statsAssigned: assign})
+	}
 
+	allStatsReady = () => {
+		let statsSet = 0
+		const allStats = this.state.statsAssigned
+		for(let stat in allStats) {
+			statsSet += (allStats[stat] > 0) ? 1 : 0
+		}
+		return Object.keys(allStats).length === statsSet
 	}
 
 	createStatChooser = () => {
 		let selectors = []
 		const stats = ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"]
-		let options = []
-		// stats.forEach(function (stat, index) {
-		// 	options.push(<option value={stat}>{stat}</option>)
-		// })
-		// this.state.allRolls.forEach(function (value, index) {
-		// 	selectors.push()
-		// 	selectors.push(<select id={index} value="" >)
-		// 	selectors.push(options)
-		// 	selectors.push(</select>)
-		// })
+		stats.forEach((stat, index) => {
+			selectors.push(
+			<div>
+				<label htmlFor={stat}>{stat.toUpperCase()}</label>
+				{this.state.statsAssigned[stat] === 0 &&
+					<input className="roll-button" type="submit" value={`Roll ${stat.toUpperCase()}`} onClick={() => { this.assignStat(stat) }} />
+				}
+				{this.state.statsAssigned[stat]}
+			</div>
+			)
+		})
 		return selectors
 	}
 
@@ -102,24 +105,21 @@ class Stats extends React.Component {
 	    const { drizzle } = this.props;
 	    const contract = drizzle.contracts.DungeonsAndDragons;
 	    const dataKey = contract.methods["playerSheetStats"].cacheCall();
-	    this.setState({ dataKey });
-	    // this.setState({dataKey, statsAssigned: {
-	    // 	strength: 12,
-	    // 	dexterity: 11,
-	    // 	constitution: 15,
-	    // 	wisdom: 10,
-	    // 	intelligence: 6,
-	    // 	charisma: 18,
-	    // }})
+	    this.setState({dataKey})
 	  }
 
 	render() {
-		// const statsCount = Object.keys(this.state.statsAssigned).length
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
 	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey];
 	    return (
 	    	<div>
-		    	{this.state.statsAssigned.length &&
+				{!this.allStatsReady() &&
+					this.createStatChooser()
+				}
+				{this.allStatsReady() && !this.state.submitted &&
+					<input className="submit-button" type="submit" value="Submit" onClick={this.handleSubmit} />
+				}
+		    	{this.state.submitted &&
 			    	<form className="charsheet-stats" onSubmit={this.handleSubmit}>
 					  <main>
 					    <section>
@@ -344,12 +344,6 @@ class Stats extends React.Component {
 					  	<input className="submit-button" type="submit" value="Submit" />
 					  }
 					</form>
-				}
-				{!this.state.allRolls.length && 
-					<input className="submit-button" type="submit" value="Submit" onClick={this.rollForAllStats} />
-				} 
-				{this.state.allRolls.length &&
-					this.createStatChooser()
 				}
 				{this.props.currentStep === 2 &&
 					<div>
