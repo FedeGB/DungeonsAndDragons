@@ -45,7 +45,6 @@ class Stats extends React.Component {
 		);
 		this.setState({ stackId });
 		event.preventDefault();
-		this.props.goToThird(3)
 	}
 
 	rollForAllStats = () => {
@@ -61,6 +60,7 @@ class Stats extends React.Component {
 		const txHash = transactionStack[this.state.stackId];
 		if (!txHash) return null;
 		if(!transactions[txHash]) return null;
+		if(transactions[txHash].status === 'success') this.props.goToThird(3)
 		return `Transaction status: ${transactions[txHash].status}`;
 	};
 
@@ -351,8 +351,12 @@ class Stats extends React.Component {
 				{this.state.allRolls.length &&
 					this.createStatChooser()
 				}
-				<p>Txn Status:</p>
-	 	    	<div>{this.getTxStatus()}</div>
+				{this.props.currentStep === 2 &&
+					<div>
+						<p>Txn Status:</p>
+			 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
+		 	    	</div>
+	 	    	}
 			</div>
 	    );
 	}

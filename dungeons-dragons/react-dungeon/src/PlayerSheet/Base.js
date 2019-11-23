@@ -39,7 +39,6 @@ class Base extends React.Component {
 		});
 		this.setState({ stackId });
 		event.preventDefault();
-		this.props.goToSecond(2)
 	}
 
 	getTxStatus = () => {
@@ -47,7 +46,7 @@ class Base extends React.Component {
 		const txHash = transactionStack[this.state.stackId]
 		if (!txHash) return null
 		if(!transactions[txHash]) return null
-		console.log(transactions[txHash])
+		if(transactions[txHash].status === 'success') this.props.goToSecond(2)
 		return transactions[txHash].status
 	};
 
@@ -133,8 +132,12 @@ class Base extends React.Component {
 				  	<input className="submit-button" type="submit" value="Submit" />
 				  }
 				</form>
-				<p>Txn Status:</p>
-	 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
+				{this.props.currentStep === 1 &&
+					<div>
+						<p>Txn Status:</p>
+			 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
+		 	    	</div>
+	 	    	}
 			</div>
 	    );
 	}
