@@ -30,13 +30,19 @@ class Base extends React.Component {
 	handleSubmit(event) {
 		const { drizzle, drizzleState } = this.props;
 		const contract = drizzle.contracts.DungeonsAndDragons;
-		if(this.state.class === '') this.setState({class: 'Druid'});
-		if(this.state.race === '') this.setState({race: 'Half Elf'});
-		if(this.state.gender === '') this.setState({gender: 'Male'});
-		const stackId = contract.methods["setBasicCharacterSheet"].cacheSend(this.state.charName, this.state.playerName, this.state.class, this.state.level,
-		 this.state.race, this.state.age, this.state.gender, {
-		  from: drizzleState.accounts[0]
-		});
+		const charName = this.state.charName
+		const playerName = this.state.playerName
+		const level = this.state.level
+		const age = this.state.age
+		const classs = this.state.class ? this.state.class : 'Druid'
+		const race = this.state.race ? this.state.race : 'Half Elf'
+		const gender = this.state.gender ? this.state.gender : 'Male' 
+		const stackId = contract.methods["setBasicCharacterSheet"]
+			.cacheSend(charName, playerName, classs, level, race, age, gender,
+				{
+		  			from: drizzleState.accounts[0]
+				}
+			);
 		this.setState({ stackId });
 		event.preventDefault();
 	}
