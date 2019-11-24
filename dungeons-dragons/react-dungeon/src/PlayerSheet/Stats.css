@@ -180,31 +180,6 @@ form.charsheet-stats main > section section.attributes div.scores ul li div.modi
   margin: -1px;
   text-align: center;
 }
-form.charsheet-stats main > section section.attributes div.attr-applications div.inspiration {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-form.charsheet-stats main > section section.attributes div.attr-applications div.inspiration input {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border: 1px solid black;
-  padding: 15px;
-  border-radius: 10px;
-}
-form.charsheet-stats main > section section.attributes div.attr-applications div.proficiencybonus {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-form.charsheet-stats main > section section.attributes div.attr-applications div.proficiencybonus input {
-  width: 30px;
-  height: 28px;
-  border: 1px solid black;
-  text-align: center;
-  border-radius: 10px;
-}
 form.charsheet-stats main > section section.attributes div.attr-applications div.list-section {
   border: 1px solid black;
   border-radius: 10px;
@@ -227,12 +202,9 @@ form.charsheet-stats main > section section.attributes div.attr-applications div
 }
 form.charsheet-stats main > section section.attributes div.attr-applications div.list-section ul li label {
   text-transform: none;
-  font-size: 8px;
+  font-size: 15px;
   text-align: left;
   order: 3;
-}
-form.charsheet-stats main > section section.attributes div.attr-applications div.list-section ul li label span.skill {
-  color: #bbb;
 }
 form.charsheet-stats main > section section.attributes div.attr-applications div.list-section ul li input[type="text"] {
   width: 30px;
@@ -241,19 +213,6 @@ form.charsheet-stats main > section section.attributes div.attr-applications div
   border: 0;
   border-bottom: 1px solid black;
   order: 2;
-}
-form.charsheet-stats main > section section.attributes div.attr-applications div.list-section ul li input[type="checkbox"] {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  width: 10px;
-  height: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-  order: 1;
-}
-form.charsheet-stats main > section section.attributes div.attr-applications div.list-section ul li input[type="checkbox"]:checked {
-  background-color: black;
 }
 form.charsheet-stats main > section div.passive-perception {
   display: flex;

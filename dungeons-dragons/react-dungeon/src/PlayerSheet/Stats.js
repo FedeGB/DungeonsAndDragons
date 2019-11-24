@@ -183,37 +183,19 @@ class Stats extends React.Component {
 					          </ul>
 					        </div>
 					        <div className="attr-applications">
-					          <div className="inspiration box">
-					            <div className="label-container">
-					              <label htmlFor="inspiration">Inspiration</label>
-					            </div>
-					            <input name="inspiration" type="checkbox" />
-					          </div>
-					          <div className="proficiencybonus box">
-					            <div className="label-container">
-					              <label htmlFor="proficiencybonus">Proficiency Bonus</label>
-					            </div>
-					            <input name="proficiencybonus" placeholder="+2" />
-					          </div>
 					          <div className="saves list-section box">
 					            <ul>
 					              <li>
-					                <label htmlFor="Strength-save">Strength</label><input name="Strength-save" placeholder="+0" type="text" /><input name="Strength-save-prof" type="checkbox" />
+					                <label htmlFor="Constitution-save">Fortitude</label>
+					                <input name="Constitution-save" placeholder="+0" type="text" />
 					              </li>
 					              <li>
-					                <label htmlFor="Dexterity-save">Dexterity</label><input name="Dexterity-save" placeholder="+0" type="text" /><input name="Dexterity-save-prof" type="checkbox" />
+					                <label htmlFor="Dexterity-save">Reflex</label>
+					                <input name="Dexterity-save" placeholder="+0" type="text" />
 					              </li>
 					              <li>
-					                <label htmlFor="Constitution-save">Constitution</label><input name="Constitution-save" placeholder="+0" type="text" /><input name="Constitution-save-prof" type="checkbox" />
-					              </li>
-					              <li>
-					                <label htmlFor="Wisdom-save">Wisdom</label><input name="Wisdom-save" placeholder="+0" type="text" /><input name="Wisdom-save-prof" type="checkbox" />
-					              </li>
-					              <li>
-					                <label htmlFor="Intelligence-save">Intelligence</label><input name="Intelligence-save" placeholder="+0" type="text" /><input name="Intelligence-save-prof" type="checkbox" />
-					              </li>
-					              <li>
-					                <label htmlFor="Charisma-save">Charisma</label><input name="Charisma-save" placeholder="+0" type="text" /><input name="Charisma-save-prof" type="checkbox" />
+					                <label htmlFor="Wisdom-save">Willpower</label>
+					                <input name="Wisdom-save" placeholder="+0" type="text" />
 					              </li>
 					            </ul>
 					            <div className="label">
