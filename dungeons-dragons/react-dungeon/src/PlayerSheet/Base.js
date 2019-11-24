@@ -50,8 +50,8 @@ class Base extends React.Component {
 	getTxStatus = () => {
 		const { transactions, transactionStack } = this.props.drizzleState
 		const txHash = transactionStack[this.state.stackId]
-		if (!txHash) return null
-		if(!transactions[txHash]) return null
+		if (!txHash) return 'waiting'
+		if(!transactions[txHash]) return 'waiting'
 		if(transactions[txHash].status === 'success') this.props.goToSecond(2)
 		return transactions[txHash].status
 	}
@@ -140,7 +140,6 @@ class Base extends React.Component {
 				</form>
 				{this.props.currentStep === 1 &&
 					<div>
-						<p>Txn Status:</p>
 			 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
 		 	    	</div>
 	 	    	}

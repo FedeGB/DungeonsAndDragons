@@ -44,13 +44,13 @@ class Stats extends React.Component {
 	getTxStatus = () => {
 		const { transactions, transactionStack } = this.props.drizzleState
 		const txHash = transactionStack[this.state.stackId]
-		if (!txHash) return null
-		if(!transactions[txHash]) return null
+		if (!txHash) return 'waiting'
+		if(!transactions[txHash]) return 'waiting'
 		if(transactions[txHash].status === 'success') {
 			this.setState({submitted: true})
 			this.props.goToThird(3)
 		}
-		return `Transaction status: ${transactions[txHash].status}`
+		return transactions[txHash].status
 	}
 
 	rollD6 = () => {
@@ -212,7 +212,6 @@ class Stats extends React.Component {
 				}
 				{this.props.currentStep === 2 &&
 					<div>
-						<p>Txn Status:</p>
 			 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
 		 	    	</div>
 	 	    	}
