@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
 import Base from './PlayerSheet/Base'
 import Stats from './PlayerSheet/Stats'
 class App extends Component {
@@ -8,23 +8,23 @@ class App extends Component {
     loading: true,
     drizzleState: null,
     step: 0
-   };
+   }
 
   componentDidMount() {
-    const { drizzle } = this.props;
+    const { drizzle } = this.props
     // subscribe to changes in the store
     this.unsubscribe = drizzle.store.subscribe(() => {
       // every time the store updates, grab the state from drizzle
-      const drizzleState = drizzle.store.getState();
+      const drizzleState = drizzle.store.getState()
       // check to see if it's ready, if so, update local component state
       if (drizzleState.drizzleStatus.initialized) {
-        this.setState({ loading: false, drizzleState });
+        this.setState({ loading: false, drizzleState })
       }
-    });
+    })
   }
 
   compomentWillUnmount() {
-    this.unsubscribe();
+    this.unsubscribe()
   }
 
   handleGoTo = (stepTo) => {
@@ -32,8 +32,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.loading) return "Loading Drizzle...";
-    // console.log(this.state.drizzleState)
+    if (this.state.loading) return "Loading Drizzle..."
     return (
       <div className="App">
       {this.state.step === 0 &&
@@ -59,9 +58,9 @@ class App extends Component {
         />
       }
       </div>
-    );
+    )
   }
 }
 
 
-export default App;
+export default App

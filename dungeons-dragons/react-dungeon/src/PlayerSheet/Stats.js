@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import './Stats.css';
+import './Stats.css'
 
 class Stats extends React.Component {
 
@@ -19,14 +19,13 @@ class Stats extends React.Component {
 	}
 
 	constructor(props) {
-		super(props);
-		// this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		super(props)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
 	handleSubmit(event) {
-		const { drizzle, drizzleState } = this.props;
-		const contract = drizzle.contracts.DungeonsAndDragons;
+		const { drizzle, drizzleState } = this.props
+		const contract = drizzle.contracts.DungeonsAndDragons
 		const stackId = contract.methods["setStatsCharacterSheet"].cacheSend(
 			this.state.statsAssigned.strength,
 			this.state.statsAssigned.dexterity,
@@ -37,21 +36,21 @@ class Stats extends React.Component {
 			{
 			  from: drizzleState.accounts[0]
 			}
-		);
-		this.setState({ stackId });
-		event.preventDefault();
+		)
+		this.setState({ stackId })
+		event.preventDefault()
 	}
 
 	getTxStatus = () => {
-		const { transactions, transactionStack } = this.props.drizzleState;
-		const txHash = transactionStack[this.state.stackId];
-		if (!txHash) return null;
-		if(!transactions[txHash]) return null;
+		const { transactions, transactionStack } = this.props.drizzleState
+		const txHash = transactionStack[this.state.stackId]
+		if (!txHash) return null
+		if(!transactions[txHash]) return null
 		if(transactions[txHash].status === 'success') {
 			this.setState({submitted: true})
 			this.props.goToThird(3)
 		}
-		return `Transaction status: ${transactions[txHash].status}`;
+		return `Transaction status: ${transactions[txHash].status}`
 	}
 
 	rollD6 = () => {
@@ -102,15 +101,15 @@ class Stats extends React.Component {
 	}
 
 	componentDidMount() {
-	    const { drizzle } = this.props;
-	    const contract = drizzle.contracts.DungeonsAndDragons;
-	    const dataKey = contract.methods["playerSheetStats"].cacheCall();
+	    const { drizzle } = this.props
+	    const contract = drizzle.contracts.DungeonsAndDragons
+	    const dataKey = contract.methods["playerSheetStats"].cacheCall()
 	    this.setState({dataKey})
 	  }
 
 	render() {
-	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
-	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey];
+	    const { DungeonsAndDragons } = this.props.drizzleState.contracts
+	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey]
 	    return (
 	    	<div>
 				{!this.allStatsReady() &&
@@ -218,9 +217,9 @@ class Stats extends React.Component {
 		 	    	</div>
 	 	    	}
 			</div>
-	    );
+	    )
 	}
 	
 }
 
-export default Stats;
+export default Stats

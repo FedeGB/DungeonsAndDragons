@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import './Base.css';
+import './Base.css'
 
 class Base extends React.Component {
 
@@ -15,21 +15,21 @@ class Base extends React.Component {
 			race: '',
 			age: '',
 			gender: ''
-	};
+	}
 
 	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		super(props)
+		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	}
 
 	handleChange(event) {
-    	this.setState({[event.target.id]: event.target.value});
+    	this.setState({[event.target.id]: event.target.value})
 	}
 
 	handleSubmit(event) {
-		const { drizzle, drizzleState } = this.props;
-		const contract = drizzle.contracts.DungeonsAndDragons;
+		const { drizzle, drizzleState } = this.props
+		const contract = drizzle.contracts.DungeonsAndDragons
 		const charName = this.state.charName
 		const playerName = this.state.playerName
 		const level = this.state.level
@@ -43,8 +43,8 @@ class Base extends React.Component {
 		  			from: drizzleState.accounts[0]
 				}
 			);
-		this.setState({ stackId });
-		event.preventDefault();
+		this.setState({ stackId })
+		event.preventDefault()
 	}
 
 	getTxStatus = () => {
@@ -54,13 +54,13 @@ class Base extends React.Component {
 		if(!transactions[txHash]) return null
 		if(transactions[txHash].status === 'success') this.props.goToSecond(2)
 		return transactions[txHash].status
-	};
+	}
 
 	componentDidMount() {
-	    const { drizzle } = this.props;
-	    const contract = drizzle.contracts.DungeonsAndDragons;
-	    const dataKey = contract.methods["playerSheet"].cacheCall();
-	    this.setState({ dataKey });
+	    const { drizzle } = this.props
+	    const contract = drizzle.contracts.DungeonsAndDragons
+	    const dataKey = contract.methods["playerSheet"].cacheCall()
+	    this.setState({ dataKey })
 	}
 
 	isHidden = () => {
@@ -150,4 +150,4 @@ class Base extends React.Component {
 	
 }
 
-export default Base;
+export default Base
