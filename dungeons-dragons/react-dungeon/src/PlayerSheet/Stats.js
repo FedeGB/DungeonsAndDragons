@@ -204,9 +204,6 @@ class Stats extends React.Component {
 					          </div>
 					        </div>
 					      </section>
-					      <div className="otherprofs box textblock">
-					        <label htmlFor="otherprofs">Other Proficiencies and Languages</label><textarea name="otherprofs"></textarea>
-					      </div>
 					    </section>
 					    <section>
 					      <section className="combat">

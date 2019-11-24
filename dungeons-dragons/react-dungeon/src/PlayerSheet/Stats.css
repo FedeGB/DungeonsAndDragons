@@ -226,9 +226,6 @@ form.charsheet-stats main > section div.passive-perception input {
   border: 1px solid black;
   border-radius: 10px;
 }
-form.charsheet-stats main > section div.otherprofs textarea {
-  height: 26em;
-}
 form.charsheet-stats main section.combat {
   background-color: #eee;
   display: flex;
