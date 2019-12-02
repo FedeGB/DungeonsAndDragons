@@ -112,7 +112,7 @@ class Stats extends React.Component {
 	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey]
 	    return (
 	    	<div>
-				{!this.allStatsReady() &&
+				{!this.state.submitted &&
 					this.createStatChooser()
 				}
 				{this.allStatsReady() && !this.state.submitted &&
