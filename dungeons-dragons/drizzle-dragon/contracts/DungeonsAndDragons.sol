@@ -34,9 +34,9 @@ contract DungeonsAndDragons {
 	}
 
 	struct SavingThrowCharacterStats {
-		uint64 fortitude;
-		uint64 reflex;
-		uint64 willpower;
+		int64 fortitude;
+		int64 reflex;
+		int64 willpower;
 	}
 
 	BaiscCharacterRecordSheet public playerSheet;
@@ -108,9 +108,9 @@ contract DungeonsAndDragons {
 	}
 
 	function setCharacterSavingThrowStats(string memory class, uint64 level) public {
-		uint64 fortitude = getSavingThrow("fortitude", class, level);
-		uint64 reflex = getSavingThrow("reflex", class, level);
-		uint64 willpower = getSavingThrow("willpower", class, level);
+		int64 fortitude = getSavingThrow("fortitude", class, level) + playerSheetStats.constitutionModifier;
+		int64 reflex = getSavingThrow("reflex", class, level) + playerSheetStats.dexterityModifier;
+		int64 willpower = getSavingThrow("willpower", class, level) + playerSheetStats.wisdomModifier;
 		playerSavingThrows =  SavingThrowCharacterStats({
 			fortitude: fortitude,
 			reflex: reflex,
@@ -118,7 +118,7 @@ contract DungeonsAndDragons {
 		});
 	}
 
-	function getSavingThrow(string memory saving, string memory class, uint64 level) internal pure returns(uint64) {
+	function getSavingThrow(string memory saving, string memory class, uint64 level) internal pure returns(int64) {
 		if(compareStrings("Rogue", class)) {
 			if(compareStrings("fortitude", saving)){
 				return getRogueFortitude(level);
@@ -155,7 +155,7 @@ contract DungeonsAndDragons {
 		return 0;
 	}
 
-	function getRogueFortitude(uint64 level) internal pure returns(uint64) {
+	function getRogueFortitude(uint64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 0;
 		if(level == 3) return 1;
@@ -168,7 +168,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 3;
 	}
 
-	function getRogueReflex(uint64 level) internal pure returns(uint64) {
+	function getRogueReflex(uint64 level) internal pure returns(int64) {
 		if(level == 1) return 2;
 		if(level == 2) return 3;
 		if(level == 3) return 3;
@@ -181,12 +181,12 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getRogueWillPower(uint64 level) internal pure returns(uint64) {
+	function getRogueWillPower(uint64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getRogueFortitude(level);
 	}
 
-	function getFighterFortitude(uint64 level) internal pure returns(uint64) {
+	function getFighterFortitude(uint64 level) internal pure returns(int64) {
 		if(level == 1) return 2;
 		if(level == 2) return 3;
 		if(level == 3) return 3;
@@ -199,7 +199,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getFighterReflex(uint64 level) internal pure returns(uint64) {
+	function getFighterReflex(uint64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 0;
 		if(level == 3) return 1;
@@ -212,12 +212,12 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 3;
 	}
 
-	function getFighterWillPower(uint64 level) internal pure returns(uint64) {
+	function getFighterWillPower(uint64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getFighterReflex(level);
 	}
 
-	function getBarbarianFortitude(uint64 level) internal pure returns(uint64) {
+	function getBarbarianFortitude(uint64 level) internal pure returns(int64) {
 		if(level == 1) return 2;
 		if(level == 2) return 3;
 		if(level == 3) return 3;
@@ -230,7 +230,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getBarbarianReflex(uint64 level) internal pure returns(uint64) {
+	function getBarbarianReflex(uint64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 0;
 		if(level == 3) return 1;
@@ -243,7 +243,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 3;
 	}
 
-	function getBarbarianWillPower(uint64 level) internal pure returns(uint64) {
+	function getBarbarianWillPower(uint64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getBarbarianReflex(level);
 	}
