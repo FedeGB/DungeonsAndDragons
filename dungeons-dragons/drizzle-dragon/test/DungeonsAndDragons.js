@@ -30,4 +30,14 @@ contract("DungeonsAndDragons", accounts => {
 	assert.equal(playerSheetStats.charisma, 18);
 	assert.equal(playerSheetStats.charismaModifier, 4);
   });
+
+  it("string comparison function", async () => {
+    const dyd = await DungeonsAndDragons.deployed();
+    let result = await dyd.compareStrings("not", "equal");
+    assert.equal(result, false);
+	result = await dyd.compareStrings("equal", "equal");
+	assert.equal(result, true);
+	result = await dyd.compareStrings("", "");
+	assert.equal(result, true);
+  });
 });

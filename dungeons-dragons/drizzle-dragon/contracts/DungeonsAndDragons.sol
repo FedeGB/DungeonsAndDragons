@@ -33,14 +33,26 @@ contract DungeonsAndDragons {
 		int64 charismaModifier;
 	}
 
+	struct SavingThrowCharacterStats {
+		uint64 fortitude;
+		uint64 reflex;
+		uint64 willpower;
+	}
+
 	BaiscCharacterRecordSheet public playerSheet;
 
 	StatsCharacterRecordSheet public playerSheetStats;
+
+	SavingThrowCharacterStats public playerSavingThrows;
 
 	constructor() public payable {
 	    creator = msg.sender;
 	    createdAt = now;
 	    balances[msg.sender] = 10000;
+	}
+
+	function compareStrings (string memory a, string memory b) public pure returns (bool) {
+		return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))) );
 	}
 
 	function setBasicCharacterSheet(string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 age, string memory gender) public {
@@ -70,6 +82,7 @@ contract DungeonsAndDragons {
 
 	function setStatsCharacterSheet(uint64 strength, uint64 dexterity, uint64 constitution, uint64 wisdom, uint64 intelligence, uint64 charisma) public {
 		require(msg.sender == creator, "Only the creator of it\'s own player sheet can modify it\'s data");
+		require(compareStrings(playerSheet.class, "") == false, "Character class is not set");
 		int64 strengthModifier = getStatModifier(strength);
 		int64 dexterityModifier = getStatModifier(dexterity);
 		int64 constitutionModifier = getStatModifier(constitution);
@@ -90,6 +103,148 @@ contract DungeonsAndDragons {
 		 	charisma: charisma,
 		 	charismaModifier: charismaModifier
 		 });
+
+		setCharacterSavingThrowStats(playerSheet.class, playerSheet.level);
 	}
 
+	function setCharacterSavingThrowStats(string memory class, uint64 level) public {
+		uint64 fortitude = getSavingThrow("fortitude", class, level);
+		uint64 reflex = getSavingThrow("reflex", class, level);
+		uint64 willpower = getSavingThrow("willpower", class, level);
+		playerSavingThrows =  SavingThrowCharacterStats({
+			fortitude: fortitude,
+			reflex: reflex,
+			willpower: willpower
+		});
+	}
+
+	function getSavingThrow(string memory saving, string memory class, uint64 level) internal pure returns(uint64) {
+		if(compareStrings("Rogue", class)) {
+			if(compareStrings("fortitude", saving)){
+				return getRogueFortitude(level);
+			}
+			if(compareStrings("reflex", saving)){
+				return getRogueReflex(level);
+			}
+			if(compareStrings("willpower", saving)){
+				return getRogueWillPower(level);
+			}
+		}
+		if(compareStrings("Fighter", class)) {
+			if(compareStrings("fortitude", saving)){
+				return getFighterFortitude(level);
+			}
+			if(compareStrings("reflex", saving)){
+				return getFighterReflex(level);
+			}
+			if(compareStrings("willpower", saving)){
+				return getFighterWillPower(level);
+			}
+		}
+		if(compareStrings("Barbarian", class)) {
+			if(compareStrings("fortitude", saving)){
+				return getBarbarianFortitude(level);
+			}
+			if(compareStrings("reflex", saving)){
+				return getBarbarianReflex(level);
+			}
+			if(compareStrings("willpower", saving)){
+				return getBarbarianWillPower(level);
+			}
+		}
+		return 0;
+	}
+
+	function getRogueFortitude(uint64 level) internal pure returns(uint64) {
+		if(level == 1) return 0;
+		if(level == 2) return 0;
+		if(level == 3) return 1;
+		if(level == 4) return 1;
+		if(level == 5) return 1;
+		if(level == 6) return 2;
+		if(level == 7) return 2;
+		if(level == 8) return 2;
+		if(level == 9) return 3;
+		if(level >= 10) return 3;
+	}
+
+	function getRogueReflex(uint64 level) internal pure returns(uint64) {
+		if(level == 1) return 2;
+		if(level == 2) return 3;
+		if(level == 3) return 3;
+		if(level == 4) return 4;
+		if(level == 5) return 4;
+		if(level == 6) return 5;
+		if(level == 7) return 5;
+		if(level == 8) return 6;
+		if(level == 9) return 6;
+		if(level >= 10) return 7;
+	}
+
+	function getRogueWillPower(uint64 level) internal pure returns(uint64) {
+		// Table values are the same
+		return getRogueFortitude(level);
+	}
+
+	function getFighterFortitude(uint64 level) internal pure returns(uint64) {
+		if(level == 1) return 2;
+		if(level == 2) return 3;
+		if(level == 3) return 3;
+		if(level == 4) return 4;
+		if(level == 5) return 4;
+		if(level == 6) return 5;
+		if(level == 7) return 5;
+		if(level == 8) return 6;
+		if(level == 9) return 6;
+		if(level >= 10) return 7;
+	}
+
+	function getFighterReflex(uint64 level) internal pure returns(uint64) {
+		if(level == 1) return 0;
+		if(level == 2) return 0;
+		if(level == 3) return 1;
+		if(level == 4) return 1;
+		if(level == 5) return 1;
+		if(level == 6) return 2;
+		if(level == 7) return 2;
+		if(level == 8) return 2;
+		if(level == 9) return 3;
+		if(level >= 10) return 3;
+	}
+
+	function getFighterWillPower(uint64 level) internal pure returns(uint64) {
+		// Table values are the same
+		return getFighterReflex(level);
+	}
+
+	function getBarbarianFortitude(uint64 level) internal pure returns(uint64) {
+		if(level == 1) return 2;
+		if(level == 2) return 3;
+		if(level == 3) return 3;
+		if(level == 4) return 4;
+		if(level == 5) return 4;
+		if(level == 6) return 5;
+		if(level == 7) return 5;
+		if(level == 8) return 6;
+		if(level == 9) return 6;
+		if(level >= 10) return 7;
+	}
+
+	function getBarbarianReflex(uint64 level) internal pure returns(uint64) {
+		if(level == 1) return 0;
+		if(level == 2) return 0;
+		if(level == 3) return 1;
+		if(level == 4) return 1;
+		if(level == 5) return 1;
+		if(level == 6) return 2;
+		if(level == 7) return 2;
+		if(level == 8) return 2;
+		if(level == 9) return 3;
+		if(level >= 10) return 3;
+	}
+
+	function getBarbarianWillPower(uint64 level) internal pure returns(uint64) {
+		// Table values are the same
+		return getBarbarianReflex(level);
+	}
 }
