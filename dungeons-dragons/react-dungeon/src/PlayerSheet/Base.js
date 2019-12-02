@@ -84,12 +84,7 @@ class Base extends React.Component {
 				        <li>
 				          <label htmlFor="classlevel">Class</label>
 				          <select id="class" value={this.state.class} onChange={this.handleChange} hidden={this.isHidden()}>
-							<option value="Druid">Druid</option>
 							<option value="Rogue">Rogue</option>
-							<option value="Warlock">Warlock</option>
-							<option value="Cleric">Cleric</option>
-							<option value="Paladin">Paladin</option>
-							<option value="Wizard">Wizard</option>
 							<option value="Fighter">Figher</option>
 							<option value="Barbarian">Barbarian</option>
 						  </select>
