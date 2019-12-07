@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import './App.css'
 import Base from './PlayerSheet/Base'
 import Stats from './PlayerSheet/Stats'
+import Combat from './PlayerSheet/Combat'
+
 class App extends Component {
 
   state = {
@@ -57,6 +59,14 @@ class App extends Component {
           currentStep={this.state.step}
         />
       }
+      {this.state.step >= 3 &&
+        <Combat
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+          goToFourth={this.handleGoTo}
+          currentStep={this.state.step}
+        />
+        }
       </div>
     )
   }

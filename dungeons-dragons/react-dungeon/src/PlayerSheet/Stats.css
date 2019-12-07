@@ -36,6 +36,8 @@ form.charsheet-stats {
   margin-right: auto;
   margin-left: auto;
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
 }
 form.charsheet-stats div.textblock {
   display: flex;
@@ -116,10 +118,10 @@ form.charsheet-stats main > section section.attributes {
   justify-content: space-between;
 }
 form.charsheet-stats main > section section.attributes div.scores {
-  width: 101px;
   background-color: #bbb;
   border-radius: 10px;
-  padding-bottom: 5px;
+  padding: 0 6px 6px 6px;
+  margin-right: 20px;
 }
 form.charsheet-stats main > section section.attributes div.scores label {
   font-size: 8px;
@@ -127,7 +129,7 @@ form.charsheet-stats main > section section.attributes div.scores label {
 }
 form.charsheet-stats main > section section.attributes div.scores ul {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
   height: 100%;

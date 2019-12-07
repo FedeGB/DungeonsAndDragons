@@ -113,7 +113,6 @@ class Stats extends React.Component {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts
 	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.playerSheetStatsKey]
 	    const playerSavingThrows = DungeonsAndDragons.playerSavingThrows[this.state.playerSavingThrowsKey]
-	    console.log(playerSavingThrows)
 	    return (
 	    	<div>
 				{!this.state.submitted &&
