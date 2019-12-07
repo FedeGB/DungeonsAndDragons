@@ -5,7 +5,8 @@ import './Stats.css'
 class Stats extends React.Component {
 
 	state = { 
-			dataKey: null,
+			playerSheetStatsKey: null,
+			playerSavingThrows: null,
 			stackId: null,
 			statsAssigned: {
 		    	strength: 0,
@@ -88,7 +89,7 @@ class Stats extends React.Component {
 		const stats = ["strength", "dexterity", "constitution", "wisdom", "intelligence", "charisma"]
 		stats.forEach((stat, index) => {
 			selectors.push(
-			<div>
+			<div key={stat}>
 				<label htmlFor={stat}>{stat.toUpperCase()}</label>
 				{this.state.statsAssigned[stat] === 0 &&
 					<input className="roll-button" type="submit" value={`Roll ${stat.toUpperCase()}`} onClick={() => { this.assignStat(stat) }} />
@@ -103,13 +104,16 @@ class Stats extends React.Component {
 	componentDidMount() {
 	    const { drizzle } = this.props
 	    const contract = drizzle.contracts.DungeonsAndDragons
-	    const dataKey = contract.methods["playerSheetStats"].cacheCall()
-	    this.setState({dataKey})
+	    const playerSheetStatsKey = contract.methods["playerSheetStats"].cacheCall()
+	    const playerSavingThrowsKey = contract.methods["playerSavingThrows"].cacheCall()
+	    this.setState({playerSheetStatsKey, playerSavingThrowsKey})
 	  }
 
 	render() {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts
-	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey]
+	    const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.playerSheetStatsKey]
+	    const playerSavingThrows = DungeonsAndDragons.playerSavingThrows[this.state.playerSavingThrowsKey]
+	    console.log(playerSavingThrows)
 	    return (
 	    	<div>
 				{!this.state.submitted &&
@@ -186,15 +190,15 @@ class Stats extends React.Component {
 					            <ul>
 					              <li>
 					                <label htmlFor="Constitution-save">Fortitude</label>
-					                <input name="Constitution-save" placeholder="+0" type="text" />
+					                <div name="Constitution-save">{playerSavingThrows && playerSavingThrows.value.fortitude}</div>
 					              </li>
 					              <li>
 					                <label htmlFor="Dexterity-save">Reflex</label>
-					                <input name="Dexterity-save" placeholder="+0" type="text" />
+					                <div name="Dexterity-save">{playerSavingThrows && playerSavingThrows.value.reflex}</div>
 					              </li>
 					              <li>
 					                <label htmlFor="Wisdom-save">Willpower</label>
-					                <input name="Wisdom-save" placeholder="+0" type="text" />
+					                <div name="Wisdom-save">{playerSavingThrows && playerSavingThrows.value.willpower}</div>
 					              </li>
 					            </ul>
 					            <div className="label">

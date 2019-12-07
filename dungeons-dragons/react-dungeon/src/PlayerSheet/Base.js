@@ -34,7 +34,7 @@ class Base extends React.Component {
 		const playerName = this.state.playerName
 		const level = this.state.level
 		const age = this.state.age
-		const classs = this.state.class ? this.state.class : 'Druid'
+		const classs = this.state.class ? this.state.class : 'Rogue'
 		const race = this.state.race ? this.state.race : 'Half Elf'
 		const gender = this.state.gender ? this.state.gender : 'Male' 
 		const stackId = contract.methods["setBasicCharacterSheet"]
