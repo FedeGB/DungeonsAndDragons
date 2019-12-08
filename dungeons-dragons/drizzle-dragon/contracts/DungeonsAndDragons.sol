@@ -39,11 +39,22 @@ contract DungeonsAndDragons {
 		int64 willpower;
 	}
 
+	struct CombatCharacterStats {
+		int64 armorClass;
+		int64 currentHitPoints;
+		int64 totalHitPoints;
+		int64 hitDice;
+		int64 initiative;
+		int64 baseBonusAttack;
+	}
+
 	BaiscCharacterRecordSheet public playerSheet;
 
 	StatsCharacterRecordSheet public playerSheetStats;
 
 	SavingThrowCharacterStats public playerSavingThrows;
+
+	CombatCharacterStats public playerCombatStats;
 
 	constructor() public payable {
 	    creator = msg.sender;
@@ -246,5 +257,85 @@ contract DungeonsAndDragons {
 	function getBarbarianWillPower(uint64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getBarbarianReflex(level);
+	}
+
+	function setCharacterCombatStats(string memory class, uint64 level) public {
+		int64 initiative = playerSheetStats.dexterityModifier;
+		int64 armorClass = 10;
+		int64 baseBonusAttack = getBaseBonusAtack(class, level);
+		int64 hitDice = getClassHitDice(class);
+		playerCombatStats = CombatCharacterStats({
+			initiative: initiative,
+			armorClass: armorClass,
+			hitDice: hitDice,
+			totalHitPoints: hitDice,
+			currentHitPoints: hitDice,
+			baseBonusAttack: baseBonusAttack
+		});
+	}
+
+	function getClassHitDice(string memory class) internal pure returns(int64) {
+		if(compareStrings("Barbarian", class)) {
+			return 12;
+		}
+		if(compareStrings("Rogue", class)) {
+			return 6;
+		}
+		if(compareStrings("Fighter", class)) {
+			return 10;
+		}
+		return 4;
+	}
+
+	function getBaseBonusAtack(string memory class, uint64 level) internal pure returns(int64) {
+		if(compareStrings("Barbarian", class)) {
+			return getBarbarianBBA(level);
+		}
+		if(compareStrings("Rogue", class)) {
+			return getRogueBBA(level);
+		}
+		if(compareStrings("Figther", class)) {
+			return getFighterBBA(level);
+		}
+		return 0;
+	}
+
+	function getBarbarianBBA(uint64 level) internal pure returns(int64) {
+		if(level == 1) return 1;
+		if(level == 2) return 2;
+		if(level == 3) return 3;
+		if(level == 4) return 4;
+		if(level == 5) return 5;
+		if(level == 6) return 6;
+		if(level == 7) return 7;
+		if(level == 8) return 8;
+		if(level == 9) return 9;
+		if(level >= 10) return 10;
+	}
+	
+	function getRogueBBA(uint64 level) internal pure returns(int64) {
+		if(level == 1) return 0;
+		if(level == 2) return 1;
+		if(level == 3) return 2;
+		if(level == 4) return 3;
+		if(level == 5) return 3;
+		if(level == 6) return 4;
+		if(level == 7) return 5;
+		if(level == 8) return 6;
+		if(level == 9) return 6;
+		if(level >= 10) return 7;
+	}
+
+	function getFighterBBA(uint64 level) internal pure returns(int64) {
+		if(level == 1) return 1;
+		if(level == 2) return 2;
+		if(level == 3) return 3;
+		if(level == 4) return 4;
+		if(level == 5) return 5;
+		if(level == 6) return 6;
+		if(level == 7) return 7;
+		if(level == 8) return 8;
+		if(level == 9) return 9;
+		if(level >= 10) return 10;
 	}
 }

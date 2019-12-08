@@ -5,41 +5,14 @@ import './Combat.css';
 class Stats extends React.Component {
 
 	state = { 
-			dataKey: null,
+			combatStatsKey: null,
 			stackId: null,
-			// statsAssigned: {
-		 //    	strength: 0,
-		 //    	dexterity: 0,
-		 //    	constitution: 0,
-		 //    	wisdom: 0,
-		 //    	intelligence: 0,
-		 //    	charisma: 0,
-			// },
-			// submitted: false,
 	}
 
 	constructor(props) {
 		super(props);
 		// this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleSubmit(event) {
-		const { drizzle, drizzleState } = this.props;
-		const contract = drizzle.contracts.DungeonsAndDragons;
-		// const stackId = contract.methods["setStatsCharacterSheet"].cacheSend(
-		// 	this.state.statsAssigned.strength,
-		// 	this.state.statsAssigned.dexterity,
-		// 	this.state.statsAssigned.constitution,
-		// 	this.state.statsAssigned.wisdom,
-		// 	this.state.statsAssigned.intelligence,
-		// 	this.state.statsAssigned.charisma, 
-		// 	{
-		// 	  from: drizzleState.accounts[0]
-		// 	}
-		// );
-		// this.setState({ stackId });
-		event.preventDefault();
+		// this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	getTxStatus = () => {
@@ -56,13 +29,13 @@ class Stats extends React.Component {
 	componentDidMount() {
 	    const { drizzle } = this.props;
 	    const contract = drizzle.contracts.DungeonsAndDragons;
-	    // const dataKey = contract.methods["playerSheetStats"].cacheCall();
-	    // this.setState({dataKey})
+	    const combatStatsKey = contract.methods["playerCombatStats"].cacheCall();
+	    this.setState({combatStatsKey})
 	  }
 
 	render() {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
-	    // const playerSheetStats = DungeonsAndDragons.playerSheetStats[this.state.dataKey];
+	    const combatStats = DungeonsAndDragons.combatStatsKey[this.state.combatStatsKey];
 	    return (
 	    	<div>
 		    	<div className="charsheet-combat">
@@ -71,12 +44,20 @@ class Stats extends React.Component {
 				      <section className="combat">
 				        <div className="armorclass">
 				          <div>
-				            <label htmlFor="ac">Armor Class</label><input name="ac" placeholder="10" type="text" />
+				            <label htmlFor="ac">Armor Class</label>
+				            <div name="ac">
+				            {combatStats && combatStats.armorClass}
+				            {!combatStats && "0"}
+				            </div>
 				          </div>
 				        </div>
 				        <div className="initiative">
 				          <div>
-				            <label htmlFor="initiative">Initiative</label><input name="initiative" placeholder="+0" type="text" />
+				            <label htmlFor="initiative">Initiative</label>
+				            <div name="initiative">
+				            {combatStats && combatStats.initiative}
+				            {!combatStats && "+0"}
+				            </div>
 				          </div>
 				        </div>
 				        <div className="speed">
