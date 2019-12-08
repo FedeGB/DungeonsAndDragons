@@ -116,6 +116,7 @@ contract DungeonsAndDragons {
 		 });
 
 		setCharacterSavingThrowStats(playerSheet.class, playerSheet.level);
+		setCharacterCombatStats(playerSheet.class, playerSheet.level);
 	}
 
 	function setCharacterSavingThrowStats(string memory class, uint64 level) public {

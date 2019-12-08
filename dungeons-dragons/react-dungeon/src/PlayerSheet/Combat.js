@@ -9,12 +9,6 @@ class Stats extends React.Component {
 			stackId: null,
 	}
 
-	constructor(props) {
-		super(props);
-		// this.handleChange = this.handleChange.bind(this);
-		// this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
 	getTxStatus = () => {
 		const { transactions, transactionStack } = this.props.drizzleState;
 		const txHash = transactionStack[this.state.stackId];
@@ -35,7 +29,7 @@ class Stats extends React.Component {
 
 	render() {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
-	    const combatStats = DungeonsAndDragons.combatStatsKey[this.state.combatStatsKey];
+	    const combatStats = DungeonsAndDragons.playerCombatStats[this.state.combatStatsKey];
 	    return (
 	    	<div>
 		    	<div className="charsheet-combat">
@@ -46,8 +40,8 @@ class Stats extends React.Component {
 				          <div>
 				            <label htmlFor="ac">Armor Class</label>
 				            <div name="ac">
-				            {combatStats && combatStats.armorClass}
-				            {!combatStats && "0"}
+					            {combatStats && combatStats.value.armorClass}
+					            {!combatStats && "0"}
 				            </div>
 				          </div>
 				        </div>
@@ -55,36 +49,42 @@ class Stats extends React.Component {
 				          <div>
 				            <label htmlFor="initiative">Initiative</label>
 				            <div name="initiative">
-				            {combatStats && combatStats.initiative}
-				            {!combatStats && "+0"}
+					            {combatStats && combatStats.value.initiative}
+					            {!combatStats && "+0"}
 				            </div>
 				          </div>
 				        </div>
 				        <div className="speed">
 				          <div>
-				            <label htmlFor="speed">Speed</label><input name="speed" placeholder="30" type="text" />
+				            <label htmlFor="speed">Speed</label>
+				            <div name="speed">
+				            	{"30"}
+				            </div>
 				          </div>
 				        </div>
 				        <div className="hp">
 				          <div className="regular">
 				            <div className="max">
-				              <label htmlFor="maxhp">Hit Point Maximum</label><input name="maxhp" placeholder="10" type="text" />
+				              <label htmlFor="maxhp">Hit Point Maximum</label>
+				              <div name="maxhp">
+				              	{combatStats && combatStats.value.totalHitPoints}
+				              </div>
 				            </div>
 				            <div className="current">
-				              <label htmlFor="currenthp">Current Hit Points</label><input name="currenthp" type="text" />
+				              <label htmlFor="currenthp">Current Hit Points</label>
+				              <div name="currenthp">
+				              	{combatStats && combatStats.value.currentHitPoints}
+				              </div>
 				            </div>
-				          </div>
-				          <div className="temporary">
-				            <label htmlFor="temphp">Temporary Hit Points</label><input name="temphp" type="text" />
 				          </div>
 				        </div>
 				        <div className="hitdice">
 				          <div>
-				            <div className="total">
-				              <label htmlFor="totalhd">Total</label><input name="totalhd" placeholder="2d10" type="text" />
-				            </div>
 				            <div className="remaining">
-				              <label htmlFor="remaininghd">Hit Dice</label><input name="remaininghd" type="text" />
+				              <label htmlFor="remaininghd">Hit Dice</label>
+				              <div name="remaininghd">
+				              	{combatStats && `1d${combatStats.value.hitDice}`}
+				              </div>
 				            </div>
 				          </div>
 				        </div>

@@ -1,2 +1,2 @@
-rm build/contracts/DungeonsAndDragons.json
+rm -r build/contracts
 truffle compile

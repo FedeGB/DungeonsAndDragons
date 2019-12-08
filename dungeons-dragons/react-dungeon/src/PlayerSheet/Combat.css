@@ -138,13 +138,14 @@ div.charsheet-combat main section.combat > div.armorclass > div label, div.chars
   padding-bottom: 5px;
   border-radius: 0 0 10px 10px;
 }
-div.charsheet-combat main section.combat > div.armorclass > div input, div.charsheet-combat main section.combat > div.initiative > div input, div.charsheet-combat main section.combat > div.speed > div input {
-  height: 70px;
+div.charsheet-combat main section.combat > div.armorclass > div div, div.charsheet-combat main section.combat > div.initiative > div div, div.charsheet-combat main section.combat > div.speed > div div {
+  height: 40px;
   width: 70px;
   border-radius: 10px;
   border: 1px solid black;
   text-align: center;
   font-size: 30px;
+  background-color: white;
 }
 div.charsheet-combat main section.combat > div.hp {
   flex-basis: 100%;
@@ -185,27 +186,6 @@ div.charsheet-combat main section.combat > div.hp > div.regular > div.current in
   text-align: center;
 }
 div.charsheet-combat main section.combat > div.hp > div.regular > div.current label {
-  font-size: 10px;
-  padding-bottom: 5px;
-  text-align: center;
-  font-weight: bold;
-}
-div.charsheet-combat main section.combat > div.hp > div.temporary {
-  margin: 10px;
-  margin-top: 0;
-  border: 1px solid black;
-  border-radius: 0 0 10px 10px;
-  display: flex;
-  flex-direction: column-reverse;
-  background-color: white;
-}
-div.charsheet-combat main section.combat > div.hp > div.temporary input {
-  padding: 1em 0;
-  font-size: 20px;
-  border: 0;
-  text-align: center;
-}
-div.charsheet-combat main section.combat > div.hp > div.temporary label {
   font-size: 10px;
   padding-bottom: 5px;
   text-align: center;
