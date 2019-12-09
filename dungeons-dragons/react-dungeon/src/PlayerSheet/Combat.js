@@ -83,13 +83,6 @@ class Stats extends React.Component {
 				        </div>
 				      </section>
 				    </section>
-					{this.props.currentStep === 3 &&
-						<div className="buttonContainer">
-							<button className="next-button" type="button" onClick={this.nextSheet}>
-								Create Opponent
-							</button>
-						</div>
-					}
 				  </main>
 				</div>
 			</div>
