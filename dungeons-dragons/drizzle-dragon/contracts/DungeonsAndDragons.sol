@@ -12,7 +12,7 @@ contract DungeonsAndDragons {
 		string name;
 		string player;
 		string class;
-		uint64 level;
+		int64 level;
 		string race;
 		uint64 age;
 		string gender;
@@ -66,7 +66,7 @@ contract DungeonsAndDragons {
 		return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))) );
 	}
 
-	function setBasicCharacterSheet(string memory name, string memory player, string memory class, uint64 level, string memory race, uint64 age, string memory gender) public {
+	function setBasicCharacterSheet(string memory name, string memory player, string memory class, int64 level, string memory race, uint64 age, string memory gender) public {
 		require(msg.sender == creator, "Only the creator of it\'s own player sheet can modify it\'s data");
 		playerSheet = BaiscCharacterRecordSheet({
 			name: name,
@@ -119,7 +119,7 @@ contract DungeonsAndDragons {
 		setCharacterCombatStats(playerSheet.class, playerSheet.level);
 	}
 
-	function setCharacterSavingThrowStats(string memory class, uint64 level) public {
+	function setCharacterSavingThrowStats(string memory class, int64 level) public {
 		int64 fortitude = getSavingThrow("fortitude", class, level) + playerSheetStats.constitutionModifier;
 		int64 reflex = getSavingThrow("reflex", class, level) + playerSheetStats.dexterityModifier;
 		int64 willpower = getSavingThrow("willpower", class, level) + playerSheetStats.wisdomModifier;
@@ -130,7 +130,7 @@ contract DungeonsAndDragons {
 		});
 	}
 
-	function getSavingThrow(string memory saving, string memory class, uint64 level) internal pure returns(int64) {
+	function getSavingThrow(string memory saving, string memory class, int64 level) internal pure returns(int64) {
 		if(compareStrings("Rogue", class)) {
 			if(compareStrings("fortitude", saving)){
 				return getRogueFortitude(level);
@@ -167,7 +167,7 @@ contract DungeonsAndDragons {
 		return 0;
 	}
 
-	function getRogueFortitude(uint64 level) internal pure returns(int64) {
+	function getRogueFortitude(int64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 0;
 		if(level == 3) return 1;
@@ -180,7 +180,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 3;
 	}
 
-	function getRogueReflex(uint64 level) internal pure returns(int64) {
+	function getRogueReflex(int64 level) internal pure returns(int64) {
 		if(level == 1) return 2;
 		if(level == 2) return 3;
 		if(level == 3) return 3;
@@ -193,12 +193,12 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getRogueWillPower(uint64 level) internal pure returns(int64) {
+	function getRogueWillPower(int64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getRogueFortitude(level);
 	}
 
-	function getFighterFortitude(uint64 level) internal pure returns(int64) {
+	function getFighterFortitude(int64 level) internal pure returns(int64) {
 		if(level == 1) return 2;
 		if(level == 2) return 3;
 		if(level == 3) return 3;
@@ -211,7 +211,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getFighterReflex(uint64 level) internal pure returns(int64) {
+	function getFighterReflex(int64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 0;
 		if(level == 3) return 1;
@@ -224,12 +224,12 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 3;
 	}
 
-	function getFighterWillPower(uint64 level) internal pure returns(int64) {
+	function getFighterWillPower(int64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getFighterReflex(level);
 	}
 
-	function getBarbarianFortitude(uint64 level) internal pure returns(int64) {
+	function getBarbarianFortitude(int64 level) internal pure returns(int64) {
 		if(level == 1) return 2;
 		if(level == 2) return 3;
 		if(level == 3) return 3;
@@ -242,7 +242,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getBarbarianReflex(uint64 level) internal pure returns(int64) {
+	function getBarbarianReflex(int64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 0;
 		if(level == 3) return 1;
@@ -255,22 +255,23 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 3;
 	}
 
-	function getBarbarianWillPower(uint64 level) internal pure returns(int64) {
+	function getBarbarianWillPower(int64 level) internal pure returns(int64) {
 		// Table values are the same
 		return getBarbarianReflex(level);
 	}
 
-	function setCharacterCombatStats(string memory class, uint64 level) public {
+	function setCharacterCombatStats(string memory class, int64 level) public {
 		int64 initiative = playerSheetStats.dexterityModifier;
 		int64 armorClass = 10;
 		int64 baseBonusAttack = getBaseBonusAtack(class, level);
 		int64 hitDice = getClassHitDice(class);
+		int64 totalHitPoints = 8 + playerSheetStats.constitutionModifier + (4 * level);
 		playerCombatStats = CombatCharacterStats({
 			initiative: initiative,
 			armorClass: armorClass,
 			hitDice: hitDice,
-			totalHitPoints: hitDice,
-			currentHitPoints: hitDice,
+			totalHitPoints: totalHitPoints,
+			currentHitPoints: totalHitPoints,
 			baseBonusAttack: baseBonusAttack
 		});
 	}
@@ -288,7 +289,7 @@ contract DungeonsAndDragons {
 		return 4;
 	}
 
-	function getBaseBonusAtack(string memory class, uint64 level) internal pure returns(int64) {
+	function getBaseBonusAtack(string memory class, int64 level) internal pure returns(int64) {
 		if(compareStrings("Barbarian", class)) {
 			return getBarbarianBBA(level);
 		}
@@ -301,7 +302,7 @@ contract DungeonsAndDragons {
 		return 0;
 	}
 
-	function getBarbarianBBA(uint64 level) internal pure returns(int64) {
+	function getBarbarianBBA(int64 level) internal pure returns(int64) {
 		if(level == 1) return 1;
 		if(level == 2) return 2;
 		if(level == 3) return 3;
@@ -314,7 +315,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 10;
 	}
 	
-	function getRogueBBA(uint64 level) internal pure returns(int64) {
+	function getRogueBBA(int64 level) internal pure returns(int64) {
 		if(level == 1) return 0;
 		if(level == 2) return 1;
 		if(level == 3) return 2;
@@ -327,7 +328,7 @@ contract DungeonsAndDragons {
 		if(level >= 10) return 7;
 	}
 
-	function getFighterBBA(uint64 level) internal pure returns(int64) {
+	function getFighterBBA(int64 level) internal pure returns(int64) {
 		if(level == 1) return 1;
 		if(level == 2) return 2;
 		if(level == 3) return 3;
