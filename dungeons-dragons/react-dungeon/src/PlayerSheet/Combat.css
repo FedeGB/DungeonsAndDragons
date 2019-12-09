@@ -243,150 +243,33 @@ div.charsheet-combat main section.combat > div.hitdice > div > div.remaining inp
   border: 0;
   flex: 1;
 }
-div.charsheet-combat main section.attacksandspellcasting {
-  border: 1px solid black;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-div.charsheet-combat main section.attacksandspellcasting > div {
-  margin: 10px;
+
+div.charsheet-combat main div.buttonContainer {
   display: flex;
-  flex-direction: column;
-}
-div.charsheet-combat main section.attacksandspellcasting > div > label {
-  order: 3;
-  text-align: center;
-}
-div.charsheet-combat main section.attacksandspellcasting > div > table {
-  width: 100%;
-}
-div.charsheet-combat main section.attacksandspellcasting > div > table th {
-  font-size: 10px;
-  color: #ddd;
-}
-div.charsheet-combat main section.attacksandspellcasting > div > table input {
-  width: calc(100% - 4px);
-  border: 0;
-  background-color: #eee;
-  font-size: 10px;
-  padding: 3px;
-}
-div.charsheet-combat main section.attacksandspellcasting > div textarea {
-  border: 0;
-}
-div.charsheet-combat main section.equipment {
-  border: 1px solid black;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-div.charsheet-combat main section.equipment > div {
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-div.charsheet-combat main section.equipment > div > div.money ul {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-div.charsheet-combat main section.equipment > div > div.money ul > li {
-  display: flex;
-  align-items: center;
-}
-div.charsheet-combat main section.equipment > div > div.money ul > li label {
-  border: 1px solid black;
-  border-radius: 10px 0 0 10px;
-  border-right: 0;
-  width: 20px;
-  font-size: 8px;
-  text-align: center;
-  padding: 3px 0;
-}
-div.charsheet-combat main section.equipment > div > div.money ul > li input {
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 40px;
-  padding: 10px 3px;
-  font-size: 12px;
-  text-align: center;
-}
-div.charsheet-combat main section.equipment > div > label {
-  order: 3;
-  text-align: center;
-  flex: 100%;
-}
-div.charsheet-combat main section.equipment > div > textarea {
-  flex: 1;
-  border: 0;
-}
-div.charsheet-combat main section.flavor {
-  padding: 10px;
-  background: #bbb;
-  border-radius: 10px;
-}
-div.charsheet-combat main section.flavor div {
-  background: white;
-  display: flex;
-  flex-direction: column-reverse;
-  padding: 5px;
-  border: 1px solid black;
-}
-div.charsheet-combat main section.flavor div label {
-  text-align: center;
-  font-size: 10px;
-  margin-top: 3px;
-}
-div.charsheet-combat main section.flavor div textarea {
-  border: 0;
-  border-radius: 0;
-  height: 4em;
-}
-div.charsheet-combat main section.flavor div:first-child {
-  border-radius: 10px 10px 0 0;
-}
-div.charsheet-combat main section.flavor div:not(:first-child) {
-  margin-top: 10px;
-}
-div.charsheet-combat main section.flavor div:last-child {
-  border-radius: 0 0 10px 10px;
-}
-div.charsheet-combat main section.features {
-  padding: 10px;
-}
-div.charsheet-combat main section.features div {
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column-reverse;
-}
-div.charsheet-combat main section.features div label {
-  text-align: center;
-}
-div.charsheet-combat main section.features div textarea {
-  border: 0;
-  padding: 5px;
-  height: 43em;
+  width: 200px;
+  height: 40%;
+  margin-right: 30%;
+  margin-top: 10%;
 }
 
-.submit-button {
+.next-button {
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   font-size: 16px;
   background-color: white;
   color: black;
   border: 2px solid #4CAF50; /* Green */
   border-radius: 5px;
   margin-top: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
-.submit-button:hover {
+.next-button:hover {
   background-color: #4CAF50; /* Green */
   color: white;
 }

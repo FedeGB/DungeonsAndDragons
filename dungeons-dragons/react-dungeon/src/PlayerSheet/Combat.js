@@ -9,23 +9,16 @@ class Stats extends React.Component {
 			stackId: null,
 	}
 
-	getTxStatus = () => {
-		const { transactions, transactionStack } = this.props.drizzleState;
-		const txHash = transactionStack[this.state.stackId];
-		if (!txHash) return null;
-		if(!transactions[txHash]) return null;
-		if(transactions[txHash].status === 'success') {
-			this.props.goToFourth(4)
-		}
-		return `Transaction status: ${transactions[txHash].status}`;
-	}
-
 	componentDidMount() {
 	    const { drizzle } = this.props;
 	    const contract = drizzle.contracts.DungeonsAndDragons;
 	    const combatStatsKey = contract.methods["playerCombatStats"].cacheCall();
 	    this.setState({combatStatsKey})
 	  }
+
+	nextSheet = () => {
+		this.props.goToFourth(4)
+	}
 
 	render() {
 	    const { DungeonsAndDragons } = this.props.drizzleState.contracts;
@@ -89,64 +82,16 @@ class Stats extends React.Component {
 				          </div>
 				        </div>
 				      </section>
-				      <section className="equipment">
-				        <div>
-				          <label>Equipment</label>
-				          <div className="money">
-				            <ul>
-				              <li>
-				                <label htmlFor="cp">cp</label><input name="cp" />
-				              </li>
-				              <li>
-				                <label htmlFor="sp">sp</label><input name="sp" />
-				              </li>
-				              <li>
-				                <label htmlFor="ep">ep</label><input name="ep" />
-				              </li>
-				              <li>
-				                <label htmlFor="gp">gp</label><input name="gp" />
-				              </li>
-				              <li>
-				                <label htmlFor="pp">pp</label><input name="pp" />
-				              </li>
-				            </ul>
-				          </div>
-				          <textarea placeholder="Equipment list here"></textarea>
-				        </div>
-				      </section>
 				    </section>
-				    <section>
-				      <section className="flavor">
-				        <div className="personality">
-				          <label htmlFor="personality">Personality</label><textarea name="personality"></textarea>
-				        </div>
-				        <div className="ideals">
-				          <label htmlFor="ideals">Ideals</label><textarea name="ideals"></textarea>
-				        </div>
-				        <div className="bonds">
-				          <label htmlFor="bonds">Bonds</label><textarea name="bonds"></textarea>
-				        </div>
-				        <div className="flaws">
-				          <label htmlFor="flaws">Flaws</label><textarea name="flaws"></textarea>
-				        </div>
-				      </section>
-				      <section className="features">
-				        <div>
-				          <label htmlFor="features">Features & Traits</label><textarea name="features"></textarea>
-				        </div>
-				      </section>
-				    </section>
+					{this.props.currentStep === 3 &&
+						<div className="buttonContainer">
+							<button className="next-button" type="button" onClick={this.nextSheet}>
+								Create Opponent
+							</button>
+						</div>
+					}
 				  </main>
-				  {this.props.currentStep === 3 &&
-				  	<input className="submit-button" type="submit" value="Submit" />
-				  }
 				</div>
-				{this.props.currentStep === 3 &&
-					<div>
-						<p>Txn Status:</p>
-			 	    	<div>{`Transaction status: ${this.getTxStatus()}`}</div>
-		 	    	</div>
-	 	    	}
 			</div>
 	    );
 	}
