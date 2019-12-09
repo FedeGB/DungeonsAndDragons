@@ -17,7 +17,7 @@ class Stats extends React.Component {
 	  }
 
 	nextSheet = () => {
-		this.props.goToFourth(4)
+		this.props.nextSheet(0)
 	}
 
 	render() {
@@ -83,6 +83,13 @@ class Stats extends React.Component {
 				        </div>
 				      </section>
 				    </section>
+					{this.props.currentStep === 3 &&
+						<div className="buttonContainer">
+							<button className="next-button" type="button" onClick={this.nextSheet}>
+								Create New
+							</button>
+						</div>
+					}
 				  </main>
 				</div>
 			</div>

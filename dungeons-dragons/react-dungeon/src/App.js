@@ -63,7 +63,7 @@ class App extends Component {
         <Combat
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
-          goToFourth={this.handleGoTo}
+          nextSheet={this.handleGoTo}
           currentStep={this.state.step}
         />
         }
