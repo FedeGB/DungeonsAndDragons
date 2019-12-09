@@ -116,7 +116,9 @@ class Stats extends React.Component {
 	    return (
 	    	<div>
 				{!this.state.submitted &&
-					this.createStatChooser()
+					<div className="stat-chooser">
+						{this.createStatChooser()}
+					</div>
 				}
 				{this.allStatsReady() && !this.state.submitted &&
 					<input className="submit-button" type="submit" value="Submit" onClick={this.handleSubmit} />

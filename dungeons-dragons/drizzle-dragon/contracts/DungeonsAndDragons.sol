@@ -5,10 +5,7 @@ contract DungeonsAndDragons {
 	address public creator;
 	uint public createdAt;
 
-	mapping (address => int) public balances;
-
 	struct BaiscCharacterRecordSheet {
-		// address characterBlockDir;
 		string name;
 		string player;
 		string class;
@@ -59,7 +56,6 @@ contract DungeonsAndDragons {
 	constructor() public payable {
 	    creator = msg.sender;
 	    createdAt = now;
-	    balances[msg.sender] = 10000;
 	}
 
 	function compareStrings (string memory a, string memory b) public pure returns (bool) {
