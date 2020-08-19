@@ -1,8 +1,8 @@
 # Dependencies
 
-- Truffle
-- Ganache
-- ReactJS (npm, node)
+- Truffle // $ npm install -g truffle
+- Ganache // $ npm install -g ganache-cli
+- ReactJS (npm, node v12)
 
 Also to have contracts accessible from client:
 
